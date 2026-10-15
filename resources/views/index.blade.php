@@ -18,7 +18,7 @@
             <button type="submit" class="p-2 text-white bg-red-600 hover:bg-red-800 transition-colors">Delete
                 Students</button>
         </form>
-    </div>f
+    </div>
 
     @if (empty($students))
         <p class="text-red-500 text-center py-4">Belum ada data siswa yang dikirim.</p>
@@ -31,19 +31,38 @@
                     <th class="border border-gray-300 p-2 text-left">Nama</th>
                     <th class="border border-gray-300 p-2 text-left">Jenis Kelamin</th>
                     <th class="border border-gray-300 p-2 text-left">Tanggal Lahir</th>
+                    <th class="border border-gray-300 p-2 text-left">Umur</th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach ($students as $student)
                     <tr>
-                        <td class="border border-gray-300 text-center">
-                            <img class="border border-gray-300 p-2 text-center w-20 h-20 object-cover mx-auto rounded"
+                        <td class="border border-gray-300 text-left">
+                            <img class="p-2 text-center w-30 h-30 object-cover rounded"
                                 src="{{ asset('uploads' . '/' . $student['photo']) }}">
-                            <div class="border border-gray-300 p-2 text-center">{{ $student['nisn'] }}</div>
-                            <div class="border border-gray-300 p-2">{{ $student['name'] }}</div>
-                            <div class="border border-gray-300 p-2 text-center">{{ $student['gender'] }}</div>
-                            <div class="border border-gray-300 p-2 text-center">{{ $student['birth_date'] }}</div>
+                        </td>
+
+                        <td class="border border-gray-300 text-left">
+                            <div class="p-2">{{ $student['nisn'] }}<div>
+                        </td>
+
+                        <td class="border border-gray-300 text-left">
+                            <div class="p-2">{{ $student['name'] }}</div>
+                        </td>
+
+                        <td class="border border-gray-300 text-left">
+                            <div class="p-2">{{ $student['gender'] }}</div>
+                        </td>
+                        
+                        <td class="border border-gray-300 text-left">
+                            <div class="p-2">{{ $student['birth_date'] }}</div>
+                        </td>
+
+                        <td class="border border-gray-300 text-left">
+                            <div class="p-2">
+                                {{ \Carbon\Carbon::parse($student['birth_date'])->age }}
+                            </div>
                         </td>
                     </tr>
                 @endforeach
